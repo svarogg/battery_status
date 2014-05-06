@@ -11,7 +11,7 @@ local statusIcon = Gtk.StatusIcon {
 }
 
 local function get_acpi_res()
-  local acpi = io.popen('acpi')
+  local acpi = io.popen('acpi 2>&1')
   local acpi_res = acpi:read("*line")
   acpi:close()
   return acpi_res
@@ -19,7 +19,6 @@ end
 
 local function get_icons_dir()
   local running_script = debug.getinfo(get_icons_dir).short_src
-  print(running_script)
   local dir = rex.match(running_script, [[^(.*\/)?[^\/]+.lua]]) or "./"
   return dir .. "battery-icons/"
 end
@@ -36,10 +35,11 @@ local function get_battery_file(percent)
   return string.format("%s%s.png", icons_dir, img_name)
 end
 
-local alert_thresholds = {}
-alert_thresholds[20] = false
-alert_thresholds[10] = false
-alert_thresholds[5] = false
+local alert_thresholds = {
+  [20] = false,
+  [10] = false,
+  [5] = false
+}
 local function alert_low_battery(percent)
   for threashold, was_raised in pairs(alert_thresholds) do
     if percent < threashold then
@@ -66,9 +66,14 @@ end
 local battery_rex = rex.new([[([^,]{1,3})%]])
 local function check_battery()
   local acpi_res = get_acpi_res()
+  local percent = tonumber(battery_rex:match(acpi_res))
+
+  if not percent then
+    print("Error from acpi:", acpi_res)
+    os.exit()
+  end
 
   statusIcon.tooltip_text = acpi_res
-  local percent = tonumber(battery_rex:match(acpi_res))
   statusIcon.file = get_battery_file(percent)
   alert_low_battery(percent)
 
