@@ -1,4 +1,4 @@
-package = "battery_statusgit push"
+package = "battery_status"
 rockspec_format = "1.0"
 version = "1.0-2"
 source = {
@@ -21,9 +21,9 @@ dependencies = {
 build = {
    type = "builtin",
    modules = {
-      battery_status = "battery_status.lua",
+      battery_status = "battery_status.lua"
    },
-   copy_directories = {"battery_icons"}
+   copy_directories = {"battery_icons"},
    install = {
       bin = {"runner.lua"}
    }
