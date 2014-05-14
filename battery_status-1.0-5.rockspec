@@ -1,9 +1,9 @@
 package = "battery_status"
 rockspec_format = "1.0"
-version = "1.0-4"
+version = "1.0-5"
 source = {
-   url = "https://github.com/svarogg/battery_status",
-   folder = "src"
+   url = "git://github.com/svarogg/battery_status",
+   tag = "v1.0-5"
 }
 description = {
    summary = "Battery status indicator.",
@@ -12,7 +12,7 @@ description = {
       for primitive window managers such as Awesome
    ]],
    homepage = "http://everythingisvoid.com/", -- We don't have one yet
-   license = "MIT/X11" -- or whatever you like
+   license = "MIT/X11" -- or whatever you likeGIT
 }
 dependencies = {
    "lua ~> 5.1",
@@ -22,10 +22,10 @@ dependencies = {
 build = {
    type = "builtin",
    modules = {
-      battery_status = "battery_status.lua"
+      battery_status = "src/battery_status.lua"
    },
-   copy_directories = {"battery_icons"},
+   copy_directories = {"src/battery_icons"},
    install = {
-      bin = {"runner.lua"}
+      bin = {"src/show_battery_status"}
    }
 }
