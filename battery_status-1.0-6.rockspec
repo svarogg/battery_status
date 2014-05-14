@@ -1,9 +1,9 @@
 package = "battery_status"
 rockspec_format = "1.0"
-version = "1.0-5"
+version = "1.0-6"
 source = {
    url = "git://github.com/svarogg/battery_status",
-   tag = "v1.0-5"
+   tag = "v1.0-6"
 }
 description = {
    summary = "Battery status indicator.",
