@@ -4,6 +4,9 @@ local Gtk = lgi.require('Gtk')
 local GLib = lgi.GLib
 local rex = require("rex_posix")
 
+local M = {}
+M.__index = M
+
 local statusIcon = Gtk.StatusIcon {
     visible = true,
     tooltip_text = "I'm not sure",
@@ -80,6 +83,10 @@ local function check_battery()
   return true
 end
 
-check_battery()
-GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1 * 1000 ,check_battery)
-Gtk.main()            -- make it alive, waiting for events
+function M.run()
+  check_battery()
+  GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1 * 1000 ,check_battery)
+  Gtk.main()            -- make it alive, waiting for events
+end
+
+return M
