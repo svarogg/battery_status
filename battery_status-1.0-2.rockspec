@@ -1,8 +1,8 @@
-package = "battery_status"
+package = "battery_statusgit push"
 rockspec_format = "1.0"
-version = "1.0-1"
+version = "1.0-2"
 source = {
-   url = "https://github.com/svarogg/battery_status" -- We don't have one yet
+   url = "https://github.com/svarogg/battery_status"
 }
 description = {
    summary = "Battery status indicator.",
@@ -22,8 +22,8 @@ build = {
    type = "builtin",
    modules = {
       battery_status = "battery_status.lua",
-      copy_directories = {"battery_icons"}
    },
+   copy_directories = {"battery_icons"}
    install = {
       bin = {"runner.lua"}
    }
