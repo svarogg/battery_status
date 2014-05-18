@@ -14,16 +14,20 @@ local statusIcon = Gtk.StatusIcon {
 }
 
 local function get_acpi_res()
-  local acpi = io.popen('acpi 2>&1')
+  local acpi = io.popen('acpi 2>&1') -- 2>&1 to make error go to stdout.
   local acpi_res = acpi:read("*line")
   acpi:close()
   return acpi_res
 end
 
 local function get_icons_dir()
-  local running_script = debug.getinfo(get_icons_dir).short_src
-  local dir = rex.match(running_script, [[^(.*\/)?[^\/]+.lua]]) or "./"
-  return dir .. "battery-icons/"
+  -- should find a better way to detect this
+  local luarocks_proc = io.popen('luarocks show battery_status --rock-dir')
+  local dir = luarocks_proc:read("*line")
+  luarocks_proc:close()
+  print(dir)
+
+  return dir .. "/src/battery_icons/"
 end
 
 local icons_dir = get_icons_dir()
