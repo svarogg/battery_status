@@ -3,11 +3,14 @@ Battery Status
 
 A simple battery status inidcator written in LUA using GTK to use with window managers that don't provide one, such as Awesome.
 
+Installation
+============
+To install the dependencies:
+For DPKG based distros: `sudo apt-get install lua5.1 luarocks libgirepository1.0-dev acpi`.
+For RPM based distros: `sudo yum install lua5.1 luarocks gobject-introspection-devel acpi`
+Than use the rockspec to install the rock.
+
 Usage
 =====
-`sudo apt-get install libgirepository1.0-dev`
-You will need to install LGI with luarocks with the command  
-`luarocks install lgi lrexlib-pcre`  
-Or get it from https://github.com/pavouk/lgi  
-
-Afterwards just run `lua /path/to/status.lua` in your initialization script, and enjoy!
+Add `show_battery_status` to your initialization script, or simply run it in console.
+Mouseover to see some stats.

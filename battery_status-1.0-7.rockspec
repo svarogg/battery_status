@@ -11,8 +11,8 @@ description = {
       A tiny app to display a battery status indicator
       for primitive window managers such as Awesome
    ]],
-   homepage = "http://everythingisvoid.com/", -- We don't have one yet
-   license = "MIT/X11" -- or whatever you likeGIT
+   homepage = "http://everythingisvoid.com/",
+   license = "MIT/X11"
 }
 dependencies = {
    "lua ~> 5.1",
