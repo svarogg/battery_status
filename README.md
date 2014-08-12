@@ -14,3 +14,7 @@ Usage
 =====
 Add `show_battery_status` to your initialization script, or simply run it in console.
 Mouseover to see some stats.
+
+More Info
+=========
+Additional information can be found here: http://www.everythingisvoid.com/linux/simple-battery-status-indicator-awesome-window-manager

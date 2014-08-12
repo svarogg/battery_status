@@ -3,6 +3,7 @@ local lgi = require 'lgi'
 local Gtk = lgi.require('Gtk')
 local GLib = lgi.GLib
 local rex = require("rex_posix")
+local lfs = require("lfs")
 
 local M = {}
 M.__index = M
@@ -25,7 +26,6 @@ local function get_icons_dir()
   local luarocks_proc = io.popen('luarocks show battery_status --rock-dir')
   local dir = luarocks_proc:read("*line")
   luarocks_proc:close()
-  print(dir)
 
   return dir .. "/src/battery_icons/"
 end
@@ -87,7 +87,17 @@ local function check_battery()
   return true
 end
 
+local function check_lockfile()
+  local lockfile_path = "/tmp/battery_status.lock"
+  local lockfile_handle = io.open(lockfile_path, "w")
+  if not lfs.lock(lockfile_handle, "w") then
+    print("Battery status already running.")
+    os.exit()
+  end
+end
+
 function M.run()
+  check_lockfile()
   check_battery()
   GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1 * 1000 ,check_battery)
   Gtk.main()            -- make it alive, waiting for events
